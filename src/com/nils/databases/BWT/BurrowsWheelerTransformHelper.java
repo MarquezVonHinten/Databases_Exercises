@@ -23,7 +23,19 @@ public class BurrowsWheelerTransformHelper {
     }
 
     public String decode(Pair<String, Integer> bwtPair){
-        return "misissiisis";
+        String returnString = "";
+        String bwtString = bwtPair.getKey();
+        char firstColumn[] = bwtString.toCharArray();
+        Arrays.sort(firstColumn);
+        String firstColumnString = new String(firstColumn);
+        int currentPosition = bwtPair.getValue();
+        for (int i = 0; i < bwtString.length(); i++){
+            char currentChar = bwtString.charAt(currentPosition);
+            currentPosition = count(bwtString, currentChar) + rank(currentChar, currentPosition, bwtString) - 1;
+            returnString =  currentChar + returnString;
+        }
+
+        return returnString;
     }
 
 
